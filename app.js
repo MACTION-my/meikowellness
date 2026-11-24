@@ -1,0 +1,84 @@
+'use strict';
+const $ = s => document.querySelector(s);
+const en = {
+ skip:'Skip to content',navAbout:'Our philosophy',navExp:'Experiences',navEquip:'Our equipment',navVisit:'Visit us',book:'Plan a visit',
+ heroTitle:'Wellness,<br>in your everyday.',heroDesc:'A comfortable space to pause.<br>Modern wellness technology, with thoughtful care.',discover:'Explore experiences',find:'Discover our space',heroNote:'A little time for yourself<br><b>Begins at MEIKO Wellness</b>',photoLabel:'A comfortable space. Thoughtful care.',
+ warm:'暖',relax:'松',restore:'修',unwind:'缓',pillarsNote:'Care for your body.<br>Make room for everyday vitality.',
+ aboutTitle:'A little breathing room.<br>A little care for you.',aboutLead:'Traditional herbal wisdom meets modern wellness technology.',aboutBody:'MEIKO WELLNESS brings modern wellness technology together with an accessible approach to everyday well-being. Guided by Warm, Relax, Restore and Unwind, we create comfortable, convenient experiences with care for individual needs.',value1:'Professional guidance',value1p:'Understanding your needs and introducing your options.',value2:'Thoughtful care',value2p:'From your first conversation to every visit.',know:'Talk to us about your wellness interests',
+ expTitle:'Make a moment your own.',expIntro:'From foot warming to capsule experiences,<br>explore wellness at your own pace.',exp1:'Foot warming',exp2:'Seated wellness',exp3:'Wellness capsule',equipTitle:'Modern technology. Personal care.',equipIntro:'Meet the equipment in our store,<br>with guidance from our team.',details:'Explore equipment',prod1:'Foot warmer',prod2:'Moxibustion chair',prod3:'Pelvic chair',prod4:'Wellness capsule',
+ careTitle:'Every visit deserves<br>thoughtful attention.',careIntro:'Take your time.<br>Get to know the space and your options.',firstVisit:'Plan your first visit',step1:'Start with a conversation',step1p:'Tell us about your everyday routine and wellness interests. Our team will introduce the available experiences.',step2:'Get to know the equipment',step2p:'Learn how the equipment is used and what to expect. You are welcome to ask questions at any point.',step3:'Experience at your own pace',step3p:'Settle into a comfortable environment and share how you feel with our team during your experience.',
+ visitTitle:'A calmer everyday,<br>here in Puchong.',visitNote:'Please email before visiting to confirm opening hours and experience availability.',directions:'Get directions',copyAddress:'Copy address',
+ faqTitle:'A few things<br>before your visit.',q1:'Can I find out more before deciding?',a1:'Of course. You are welcome to get to know our store, equipment and experiences, and discuss your interests with our team before deciding.',q2:'How do I check prices and session times?',a2:'Email us with the experience you are interested in. Our team can confirm current prices, availability and the relevant details.',q3:'How do I choose an experience?',a3:'Speak with our team to understand how each experience works. If you have a health condition or questions about suitability, please consult a medical professional first.',
+ contactTitle:'Your Wellness, <em>Our Care.</em>',contactIntro:'Questions about equipment, experiences or visiting us? Let’s talk.',emailUs:'Email to enquire or plan a visit',copyEmail:'Copy email address',backTop:'Back to top',footerLine:'Thoughtful care · Comfortable space · Professional guidance',visitExpect:'Find out in store',askEquipment:'Enquire about this equipment'
+};
+Object.assign(en,{
+ navAbout:'MEIKO & Wellness',navEquip:'RM68 experience',book:'Book RM68 experience',heroTag:'MEIKO WELLNESS · YOUR FIRST EXPERIENCE',heroTitle:'One visit.<br>Four ways to care.',priceNote:'Experience 4<br>wellness services',heroDesc:'Foot wellness · Moxibustion chair · Pelvic chair · Capsule<br>Make room for a little care for yourself.',discover:'Book RM68 experience on WhatsApp',find:'Explore the 4 services',heroNote:'The care you know from MEIKO<br><b>Continues at MEIKO Wellness</b>',aboutTitle:'From MEIKO,<br>to MEIKO Wellness.',aboutLead:'The same thoughtful care. A new wellness experience.',aboutBody:'Since its first store in 2007, MEIKO has continued to build its in-store service experience. That care now extends to MEIKO Wellness: modern wellness technology, comfortable surroundings and personal guidance, made part of everyday life.',brandSince:'SINCE 2007 · OUR FOUNDATION',brandNow:'MODERN WELLNESS · THOUGHTFUL CARE',expTitle:'4 wellness services.<br><span>A little more care for you.</span>',expIntro:'Experience all 4 services for RM68.<br>Select a service to discover what to expect.',exp1:'Foot wellness',exp2:'Moxibustion chair',exp4:'Pelvic chair',exp3:'Wellness capsule',prod1:'Foot wellness',prod2:'Moxibustion chair experience',prod3:'Pelvic chair experience',prod4:'Wellness capsule experience',packageTitle:'Your first experience.<br>A moment just for you.',packageLabel:'4 different wellness services in one visit.',bookPackage:'Book RM68 experience on WhatsApp',included:'YOUR RM68 EXPERIENCE INCLUDES',packageSub:'A little time to unwind.<br>A little care for yourself.',packageNote:'Please WhatsApp our team to confirm session details, timing and suitability.',careTitle:'From booking to your visit,<br>we are here for you.',careIntro:'Contact us on WhatsApp to plan your visit.<br>Discover all 4 wellness services for RM68.',step1:'Book your visit on WhatsApp',step1p:'Tell us you are interested in the RM68 four-service experience. Our team will confirm your visit arrangements.',step3:'Discover your 4 experiences',visitNote:'Please WhatsApp us before visiting to confirm opening hours and RM68 experience arrangements.',q1:'How do I book the RM68 experience?',a1:'Use any WhatsApp booking button on this page to ask about the RM68 four-service experience. Our team will help you confirm a suitable visiting time.',q2:'What does the RM68 experience include?',a2:'RM68 includes foot wellness, the moxibustion chair, pelvic chair and wellness capsule: 4 different wellness services. Please confirm session timing and suitability with our team on WhatsApp.',contactTitle:'RM68. 4 wellness experiences.<br><em>A moment just for you.</em>',contactIntro:'WhatsApp us to discover the services and arrange your visit.',emailUs:'WhatsApp us · 012-268 9133',floatingBook:'Book RM68 experience'
+});
+Object.assign(en,{entityIntro:'MEIKO Wellness is a wellness experience store in Puchong, Selangor, Malaysia. The RM68 package includes foot wellness, the moxibustion chair, pelvic chair and wellness capsule: 4 different wellness services.'});
+const original = new Map([...document.querySelectorAll('[data-i18n]')].map(el => [el,el.innerHTML]));
+let lang='zh';
+let activeExperience='foot';
+let activeProduct=null;
+let previousFocus=null;
+let toastTimer;
+const experiences={
+ foot:{image:'foot-experience',zh:{title:'从足部开始，慢下来。',copy:'在舒适座椅上，感受温热养生体验。由门店人员介绍设备操作，按个人感受沟通体验安排。',alt:'专业人员示范足部温热设备的控制面板'},en:{title:'Slow down, starting at your feet.',copy:'Settle into a comfortable seat for a warming wellness experience. Our team will introduce the controls and discuss the session with you.',alt:'A demonstration of the foot warmer controls'}},
+ moxi:{image:'moxibustion-chair',zh:{title:'温热相伴，坐享片刻放松。',copy:'在艾灸椅上认识坐式温热养生体验。由门店人员介绍使用方式，按您的感受沟通体验安排。此项服务包含在 RM68 四项体验内。',alt:'门店的白色艾灸椅'},en:{title:'Settle into a warming moment.',copy:'Discover a seated warming experience with our moxibustion chair. Our team will explain how it works and discuss the session with you. Included in the RM68 four-service experience.',alt:'The white moxibustion chair in store'}},
+ pelvic:{image:'pelvic-chair',zh:{title:'认识盆骨椅，体验现代养生。',copy:'在舒适坐式环境中，了解盆骨椅的功能与体验方式。门店人员会介绍操作与注意事项。此项服务包含在 RM68 四项体验内。',alt:'MEIKO 门店的盆骨椅'},en:{title:'Explore a modern seated experience.',copy:'Get to know the pelvic chair and its seated experience in a comfortable environment. Our team will explain its operation and things to know beforehand. Included in the RM68 four-service experience.',alt:'The MEIKO pelvic chair in store'}},
+ capsule:{image:'capsule-light',zh:{title:'让温热，陪您放慢节奏。',copy:'认识 MEIKO 太空舱的躺式温热体验。门店人员会介绍设备使用方式，协助您了解适合自己的体验安排。',alt:'MEIKO 开启的太空舱与蓝色氛围灯'},en:{title:'A warming moment to unwind.',copy:'Discover the reclining warmth of the MEIKO wellness capsule. Our team will explain how the equipment works and discuss the experience with you.',alt:'An open MEIKO wellness capsule with blue lighting'}}
+};
+const products={
+ foot:{image:'foot-warmer',zh:{title:'足部温热设备',description:'以坐式足部温热体验，为日常养生留一段舒适时光。实际设备及使用安排，请与门店人员确认。',points:['设备的操作与温度设置','体验前的准备与使用方式','当日体验时间及价格']},en:{title:'Foot warmer',description:'A seated foot-warming experience for a comfortable pause in your day. Please confirm the equipment and session arrangements with our team.',points:['Equipment operation and temperature controls','How to prepare and use the equipment','Current session availability and prices']}},
+ moxi:{image:'moxibustion-chair',zh:{title:'艾灸椅',description:'门店提供坐式温热养生设备。欢迎到店了解艾灸椅的功能、操作及体验方式。',points:['设备功能与温热体验方式','温度、时间及操作说明','体验安排及适用性咨询']},en:{title:'Moxibustion chair',description:'Discover seated warming wellness equipment in our store. Our team can explain the chair’s features, controls and experience.',points:['Equipment features and warming experience','Temperature, time and operating instructions','Session arrangements and suitability questions']}},
+ pelvic:{image:'pelvic-chair',zh:{title:'盆骨椅',description:'认识 MEIKO 门店的坐式盆骨椅设备，由门店人员为您介绍操作方式与体验详情。',points:['设备功能介绍','强度、时间及坐式使用说明','体验前需要了解的事项']},en:{title:'Pelvic chair',description:'Get to know the seated pelvic chair in our store, with an introduction to its operation and experience from our team.',points:['An introduction to the equipment','Intensity, timing and seated operation','Things to know before the experience']}},
+ capsule:{image:'capsule',zh:{title:'太空舱',description:'躺式设计的温热养生设备。以舒适的环境与现场指导，陪您了解太空舱体验。',points:['躺式设计及设备使用方式','温热设置与体验时间','到店体验及相关安排']},en:{title:'Wellness capsule',description:'Reclining warming wellness equipment in a comfortable setting. Our team will guide you through what to expect.',points:['Reclining design and equipment operation','Warmth settings and session duration','In-store experience arrangements']}}
+};
+function setExperience(key,focus=false){
+ activeExperience=key;
+ document.querySelectorAll('[data-experience]').forEach(b=>{const selected=b.dataset.experience===key;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;if(selected&&focus)b.focus();});
+ const item=experiences[key],copy=item[lang];$('#experience-image').src=`assets/${item.image}.webp`;$('#experience-image').alt=copy.alt;$('#experience-title').textContent=copy.title;$('#experience-copy').textContent=copy.copy;$('#experience-panel').setAttribute('aria-labelledby',`tab-${key}`);
+}
+function populateProduct(key){
+ const item=products[key],copy=item[lang];$('#dialog-title').textContent=copy.title;$('#dialog-description').textContent=copy.description;$('#dialog-image').src=`assets/${item.image}.webp`;$('#dialog-image').alt=copy.title;$('#dialog-points').replaceChildren(...copy.points.map(t=>{const li=document.createElement('li');li.textContent=t;return li;}));
+}
+function setLanguage(next){
+ lang=next;document.documentElement.lang=lang==='zh'?'zh-Hans':'en';document.body.classList.toggle('english',lang==='en');
+ original.forEach((zh,el)=>{el.innerHTML=lang==='en'?(en[el.dataset.i18n]||zh):zh;});
+ $('#language').textContent=lang==='zh'?'EN':'中文';$('#language').setAttribute('aria-label',lang==='zh'?'Switch to English':'切换至中文');$('#nav').setAttribute('aria-label',lang==='zh'?'主导航':'Main navigation');$('#menu').setAttribute('aria-label',lang==='zh'?'打开导航':'Open navigation');$('#close-dialog').setAttribute('aria-label',lang==='zh'?'关闭详情':'Close details');$('.circle-link').setAttribute('aria-label',lang==='zh'?'咨询体验':'Enquire about an experience');
+ document.title=lang==='zh'?'MEIKO Wellness | RM68 体验4项保健服务':'MEIKO Wellness | RM68 · 4 Wellness Experiences';setExperience(activeExperience);if(activeProduct)populateProduct(activeProduct);updateBookingLinks();
+ try{localStorage.setItem('meiko-language',lang);}catch{}
+}
+$('#language').addEventListener('click',()=>setLanguage(lang==='zh'?'en':'zh'));
+$('#menu').addEventListener('click',()=>{const open=$('#nav').classList.toggle('open');$('#menu').setAttribute('aria-expanded',String(open));});
+document.querySelectorAll('#nav a').forEach(a=>a.addEventListener('click',()=>{$('#nav').classList.remove('open');$('#menu').setAttribute('aria-expanded','false');}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#nav').classList.remove('open');$('#menu').setAttribute('aria-expanded','false');}});
+document.querySelectorAll('[data-experience]').forEach(b=>{b.addEventListener('click',()=>setExperience(b.dataset.experience));b.addEventListener('keydown',e=>{const keys=Object.keys(experiences);let index=keys.indexOf(activeExperience);if(['ArrowRight','ArrowDown','ArrowLeft','ArrowUp','Home','End'].includes(e.key)){e.preventDefault();if(e.key==='Home')index=0;else if(e.key==='End')index=keys.length-1;else index=(index+(['ArrowRight','ArrowDown'].includes(e.key)?1:-1)+keys.length)%keys.length;setExperience(keys[index],true);}});});
+document.querySelectorAll('[data-product]').forEach(b=>b.addEventListener('click',()=>{previousFocus=b;activeProduct=b.dataset.product;populateProduct(activeProduct);$('#product-dialog').showModal();document.body.classList.add('modal-open');$('#close-dialog').focus();}));
+function closeDialog(){$('#product-dialog').close();}
+$('#close-dialog').addEventListener('click',closeDialog);
+$('#dialog-contact').addEventListener('click',closeDialog);
+$('#product-dialog').addEventListener('click',e=>{if(e.target===$('#product-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDialog();}});
+$('#product-dialog').addEventListener('close',()=>{document.body.classList.remove('modal-open');activeProduct=null;previousFocus?.focus({preventScroll:true});});
+function toast(message){clearTimeout(toastTimer);$('#toast').textContent=message;$('#toast').classList.add('show');toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),4200);}
+async function copy(text,type){try{await navigator.clipboard.writeText(text);toast(lang==='zh'?`${type==='email'?'电邮':'门店地址'}已复制`:type==='email'?'Email address copied':'Store address copied');}catch{toast(text);}}
+$('#copy-email').addEventListener('click',()=>copy('meikowellnesshq@gmail.com','email'));
+$('#copy-address').addEventListener('click',()=>copy('129, Jalan Metro 1/1, Persiaran Bandar Metro Puchong, 47160 Puchong, Selangor.','address'));
+$('#year').textContent=new Date().getFullYear();
+try{if(localStorage.getItem('meiko-language')==='en')setLanguage('en');}catch{}
+
+function updateBookingLinks(){
+ const message=lang==='zh'?'你好，我想了解 MEIKO Wellness RM68 体验4项保健服务（足部养生、艾灸椅、盆骨椅、太空舱），请问可以预约什么时间？':'Hi MEIKO Wellness, I am interested in the RM68 experience with 4 wellness services (foot wellness, moxibustion chair, pelvic chair and capsule). Could I check the available visiting times?';
+ document.querySelectorAll('[data-whatsapp],.header-actions .button,.care-intro .button,.circle-link,.about-copy>.text-link').forEach(a=>{a.href='https://wa.me/60122689133?text='+encodeURIComponent(message);a.target='_blank';a.rel='noopener noreferrer';});
+}
+updateBookingLinks();
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+document.querySelectorAll('[data-experience]').forEach(button=>button.addEventListener('click',()=>{
+ if(!reducedMotion.matches){$('#experience-panel').animate([{opacity:.25,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:420,easing:'cubic-bezier(.2,.7,.2,1)'});}
+}));
+if('IntersectionObserver' in window){
+ const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){if(!reducedMotion.matches){entry.target.animate([{opacity:0,transform:'translateY(30px)'},{opacity:1,transform:'translateY(0)'}],{duration:680,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});}observer.unobserve(entry.target);}}),{threshold:.12});
+ document.querySelectorAll('.about-copy,.about-photos,.section-head,.experience-layout,.package-offer,.package-includes,.care-intro,.care-steps article,.visit-image,.visit-copy,.faq-list details,.contact h2,.contact>.button').forEach(el=>observer.observe(el));
+}
+let scrollTicking=false;
+function syncScroll(){const max=document.documentElement.scrollHeight-window.innerHeight;$('.scroll-progress').style.transform=`scaleX(${max>0?window.scrollY/max:0})`;document.body.classList.toggle('has-scrolled',window.scrollY>120);scrollTicking=false;}
+window.addEventListener('scroll',()=>{if(!scrollTicking){scrollTicking=true;requestAnimationFrame(syncScroll);}},{passive:true});syncScroll();

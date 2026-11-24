@@ -1,38 +1,238 @@
-<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DISC 行为探索室 · Behaviour Lab</title><style>
-:root{--ink:#172b32;--muted:#687b80;--bg:#f5f7f4;--line:#dce4df;--accent:#166653}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,'Microsoft YaHei',sans-serif}button,input{font:inherit}button{cursor:pointer}header{max-width:1200px;margin:auto;padding:24px 30px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.brand{font-weight:800;letter-spacing:2px}.brand small{font-size:11px;letter-spacing:1px;color:var(--muted);display:block}.lang,.ghost{background:transparent;border:1px solid var(--line);border-radius:8px;padding:9px 16px;color:var(--ink)}main{max-width:1120px;margin:auto;padding:55px 30px}h1{font-size:clamp(36px,5vw,64px);line-height:1.2;letter-spacing:-2px;margin:20px 0}h2{font-size:28px;line-height:1.4;margin:10px 0 18px}h3{margin:8px 0}.eyebrow{font-size:12px;letter-spacing:3px;color:var(--accent);font-weight:700}.lead{color:var(--muted);font-size:18px;max-width:560px}.hero{display:grid;grid-template-columns:1.15fr 1fr;gap:65px;align-items:center}.primary{border:0;border-radius:8px;background:var(--accent);color:white;padding:14px 26px;font-weight:700}.primary:disabled{opacity:.35;cursor:default}button:hover{filter:brightness(.94)}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #ba8a33;outline-offset:3px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.meta{color:var(--muted);font-size:13px;margin:14px 0}.wheel{display:grid;grid-template-columns:1fr 1fr;gap:12px;transform:rotate(-4deg);padding:15px}.tile{border-radius:22px;padding:27px;min-height:160px}.tile b{font-size:56px;line-height:1.2;display:block}.tile span{font-weight:650}.tile small{display:block;opacity:.7;font-size:12px}.d{background:#f4ded8;color:#a64838}.i{background:#f6eaca;color:#957021}.s{background:#dcece2;color:#397352}.c{background:#dde6f4;color:#406a9a}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:65px;padding-top:30px;border-top:1px solid var(--line)}.steps b{display:block}.steps p{font-size:14px;color:var(--muted)}.num{color:var(--accent);font-size:12px}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:30px}.test{max-width:790px;margin:auto}.progress{height:5px;background:#dde5df;border-radius:5px;margin:14px 0 30px;overflow:hidden}.progress i{display:block;height:100%;background:var(--accent);transition:width .25s}.topline{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}.question-row{display:grid;grid-template-columns:1fr 78px 78px;align-items:center;border-top:1px solid var(--line);min-height:85px;gap:10px}.question-row small{display:block;color:var(--muted);font-size:12px}.colhead{font-size:11px;text-align:center;color:var(--muted)}.pick{width:32px;height:32px;accent-color:var(--accent);cursor:pointer}.choice{display:flex;justify-content:center;align-items:center;padding:14px 0}.note{font-size:12px;color:var(--muted)}.results-top{display:flex;justify-content:space-between;align-items:center;gap:20px}.badge{background:#e2eee6;color:var(--accent);padding:7px 14px;border-radius:30px;font-size:12px}.reportgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;margin:24px 0}.barrow{display:grid;grid-template-columns:25px 1fr 45px;gap:12px;align-items:center;margin:22px 0}.track{height:14px;background:#edf1ed;border-radius:20px;overflow:hidden}.fill{height:100%;border-radius:20px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.cards .tile{padding:20px;min-height:0;transform:none}.cards .tile b{font-size:30px}.cards p{font-size:12px;margin:8px 0}.method{margin-top:28px}details{border-top:1px solid var(--line);padding:18px 0}summary{cursor:pointer;font-size:14px;font-weight:650}footer{max-width:1120px;margin:auto;padding:25px 30px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:20px}input[type=text]{padding:12px;border:1px solid var(--line);border-radius:8px;width:100%;max-width:300px;background:white}.subtitle{color:var(--muted);font-size:14px} @media(max-width:700px){header{padding:18px 20px}main{padding:30px 20px}.hero,.reportgrid{grid-template-columns:1fr;gap:28px}.wheel{max-width:420px;margin:auto}.tile{padding:20px;min-height:130px}.steps{gap:15px;margin-top:35px}.cards{grid-template-columns:1fr 1fr}.panel{padding:20px}.question-row{grid-template-columns:1fr 57px 57px}.results-top{align-items:flex-start}footer{padding:20px;display:block}}@media print{header .lang,.actions,.no-print,footer{display:none}body{background:white}main{padding:10px}h1{font-size:36px}.panel,.tile{break-inside:avoid}.reportgrid{grid-template-columns:1fr 1fr}.cards{grid-template-columns:repeat(4,1fr)}*{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
-</style><header><div class="brand">DISC<span style="color:#6e9d87"> / </span>LAB<small>MACTION · BEHAVIOUR EXPLORER</small></div><button class="lang" id="language">English ↗</button></header><main id="app"></main><footer><span>DISC LAB · MACTION</span><span id="foot"></span></footer><script>
-const keys=['D','I','S','C'],colors=['#bf6755','#d5af48','#609b77','#6c91bb'];
-const profiles=[
-['主导型','Dominance','目标 · 决断 · 推进','Goals · Decisions · Action','你倾向直面挑战、推动决定，关注结果与效率。','You tend to tackle challenges, drive decisions and focus on results.','明确目标和权限，沟通先说结论；推进前多听一个不同观点。','Clarify outcomes and ownership. Lead with the point, and seek another perspective before acting.','可能过快推进，忽略他人的节奏与细节。','May move too quickly and overlook other people’s pace or details.'],
-['影响型','Influence','表达 · 热情 · 连接','Expression · Energy · Connection','你倾向通过交流建立关系，带动气氛，分享想法。','You tend to build relationships through conversation, energize others and share ideas.','创造交流和表达空间，把想法变成有负责人和期限的行动。','Make room for conversation; turn ideas into actions with owners and deadlines.','可能承诺过多，或低估后续执行的细节。','May overcommit or underestimate follow-through details.'],
-['稳健型','Steadiness','耐心 · 支持 · 协作','Patience · Support · Cooperation','你倾向耐心倾听、支持伙伴，重视稳定与合作。','You tend to listen patiently, support others and value stability and cooperation.','提前说明变化，留出适应时间；主动表达需求和边界。','Explain changes early and allow adjustment time. State your needs and boundaries.','可能回避分歧，或在需要改变时迟迟不表态。','May avoid disagreement or hesitate to speak up when change is needed.'],
-['审慎型','Conscientiousness','分析 · 标准 · 准确','Analysis · Standards · Accuracy','你倾向分析事实、关注质量，重视清晰标准与准确性。','You tend to analyze evidence, focus on quality and value clear standards and accuracy.','提供依据与标准，并约定决策时限，区分关键质量与次要细节。','Provide evidence and criteria. Set a decision deadline and separate critical quality from minor details.','可能过度检查，或等待信息完全齐备才行动。','May overcheck or wait for complete information before acting.']];
-const raw=[
-[['遇到新任务，我先定目标和期限。','I set a goal and deadline for a new task.'],['遇到新任务，我先和大家交流想法。','I discuss ideas with others for a new task.'],['遇到新任务，我先了解伙伴需要什么支持。','I first learn what support teammates need.'],['遇到新任务，我先澄清要求和标准。','I clarify requirements and standards first.']],
-[['开会时，我推动大家作出决定。','In meetings, I push toward a decision.'],['开会时，我乐于调动参与气氛。','In meetings, I encourage lively participation.'],['开会时，我耐心听完不同意见。','In meetings, I patiently hear people out.'],['开会时，我检查讨论的事实依据。','In meetings, I check the evidence.']],
-[['面对变化，我愿意先试行再调整。','With change, I try things and adjust.'],['面对变化，我让大家看见新的可能。','With change, I help others see possibilities.'],['面对变化，我关心大家能否适应。','With change, I consider how people will adjust.'],['面对变化，我先评估风险和条件。','With change, I assess risks and conditions.']],
-[['有分歧时，我直接说出立场。','In disagreement, I state my position directly.'],['有分歧时，我尝试说服大家接受想法。','In disagreement, I try to win people over.'],['有分歧时，我努力保持合作关系。','In disagreement, I work to preserve cooperation.'],['有分歧时，我回到事实和规则。','In disagreement, I return to facts and rules.']],
-[['时间紧时，我优先完成关键结果。','Under time pressure, I prioritize the main outcome.'],['时间紧时，我用积极表达鼓励大家。','Under time pressure, I encourage people with energy.'],['时间紧时，我稳定节奏并帮助伙伴。','Under time pressure, I stay steady and help others.'],['时间紧时，我仍会核对关键细节。','Under time pressure, I still check critical details.']],
-[['带领项目时，我把责任和目标讲清楚。','I lead projects by clarifying ownership and goals.'],['带领项目时，我描绘愿景来争取支持。','I lead projects by sharing a vision that gains support.'],['带领项目时，我持续跟进团队的需要。','I lead projects by staying attentive to team needs.'],['带领项目时，我建立清晰流程和标准。','I lead projects by creating clear processes and standards.']],
-[['学习新工具，我直接动手解决任务。','With a new tool, I dive into a practical task.'],['学习新工具，我喜欢和别人一起探索。','With a new tool, I enjoy exploring with others.'],['学习新工具，我喜欢有人耐心示范。','With a new tool, I appreciate a patient demonstration.'],['学习新工具，我先了解原理和说明。','With a new tool, I first study instructions and logic.']],
-[['客户提出问题，我迅速给出行动方向。','For a customer issue, I quickly propose action.'],['客户提出问题，我热情交流建立信任。','For a customer issue, I build trust through warm conversation.'],['客户提出问题，我耐心听懂对方顾虑。','For a customer issue, I patiently understand concerns.'],['客户提出问题，我核实细节再提出建议。','For a customer issue, I verify details before advising.']],
-[['安排工作，我喜欢有挑战的目标。','I like challenging targets in my work.'],['安排工作，我喜欢有交流互动的机会。','I like opportunities to interact in my work.'],['安排工作，我喜欢稳定而可预期的节奏。','I like a steady, predictable rhythm in my work.'],['安排工作，我喜欢清楚的质量要求。','I like clear quality expectations in my work.']],
-[['作决定时，我关注能否尽快推进。','When deciding, I focus on moving forward.'],['作决定时，我关注能否带动大家。','When deciding, I focus on engaging people.'],['作决定时，我关注对伙伴的影响。','When deciding, I focus on effects on teammates.'],['作决定时，我关注依据是否充分。','When deciding, I focus on adequate evidence.']],
-[['收到反馈，我想知道下一步怎么改。','With feedback, I want a concrete next step.'],['收到反馈，我喜欢面对面交流想法。','With feedback, I like talking ideas through.'],['收到反馈，我重视尊重和耐心的语气。','With feedback, I value a respectful, patient tone.'],['收到反馈，我想看具体例子和标准。','With feedback, I want examples and criteria.']],
-[['团队卡住时，我主动承担决策。','When a team stalls, I take on the decision.'],['团队卡住时，我激发大家的新点子。','When a team stalls, I spark new ideas.'],['团队卡住时，我协助大家恢复配合。','When a team stalls, I help restore cooperation.'],['团队卡住时，我分析问题发生在哪一步。','When a team stalls, I analyze where the process failed.']],
-[['我对突破困难目标感到满足。','I feel satisfied when I beat a difficult target.'],['我对获得共鸣和认可感到满足。','I feel satisfied when ideas connect with people.'],['我对帮助伙伴稳定完成任务感到满足。','I feel satisfied when I help teammates deliver steadily.'],['我对交出准确可靠的成果感到满足。','I feel satisfied when I deliver accurate, reliable work.']],
-[['筹备活动，我着重目标和进度。','For an event, I focus on goals and progress.'],['筹备活动，我着重气氛和参与感。','For an event, I focus on energy and engagement.'],['筹备活动，我着重照顾参与者的需要。','For an event, I focus on participants’ needs.'],['筹备活动，我着重清单和检查流程。','For an event, I focus on checklists and checks.']],
-[['陌生环境中，我主动找出行动方向。','In a new setting, I identify a course of action.'],['陌生环境中，我主动认识新朋友。','In a new setting, I introduce myself to people.'],['陌生环境中，我先观察并逐步融入。','In a new setting, I observe and settle in gradually.'],['陌生环境中，我先弄清惯例与要求。','In a new setting, I learn expectations and conventions.']],
-[['合作时，我希望大家敢于承担和决定。','In collaboration, I value ownership and decisiveness.'],['合作时，我希望大家开放交流和分享。','In collaboration, I value open exchange and sharing.'],['合作时，我希望大家互相支持和信任。','In collaboration, I value support and trust.'],['合作时，我希望大家按标准把事情做好。','In collaboration, I value working to clear standards.']]
-];
-let en=false,view='home',idx=0,answers=raw.map(()=>({m:null,l:null})),name='',finished=false;
-const $=id=>document.getElementById(id),t=(a,b)=>en?b:a,esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function stash(){try{localStorage.setItem('disc-lab-v1',JSON.stringify({answers,name,idx,finished}));}catch(e){}}
-try{const x=JSON.parse(localStorage.getItem('disc-lab-v1'));if(x&&x.answers?.length===raw.length&&x.answers.every(a=>[a.m,a.l].every(v=>v===null||Number.isInteger(v)&&v>=0&&v<4)&&!(a.m!==null&&a.m===a.l))){answers=x.answers;name=typeof x.name==='string'?x.name.slice(0,60):'';idx=Math.max(0,Math.min(15,x.idx||0));finished=x.finished&&answers.every(a=>a.m!==null&&a.l!==null)}}catch(e){}
-function render(){document.documentElement.lang=en?'en':'zh-Hans';$('language').textContent=en?'中文 ↗':'English ↗';$('foot').textContent=t('原创自评 · 仅在本机保存 · 非标准化心理测验','Original self-reflection · Saved on this device · Not a standardized assessment');if(view==='home')home();else if(view==='test')test();else report()}
-function home(){$('app').innerHTML=`<section class="hero"><div><div class="eyebrow">UNDERSTAND YOUR WAY OF WORKING</div><h1>${t('了解你的行为风格，<br>让合作更有默契。','Know your style.<br>Connect better.')}</h1><p class="lead">${t('你如何决策、表达、协作与分析？从真实的工作情境出发，探索属于你的 DISC 行为倾向。','How do you decide, express, collaborate and analyze? Explore your DISC tendencies through everyday work situations.')}</p><div class="meta">16 ${t('组情境','groups')} / 4–6 ${t('分钟','minutes')} / ${t('中英双语报告','Bilingual report')}</div><label class="subtitle" for="name">${t('报告称呼（可选）','Report name (optional)')}</label><br><input id="name" type="text" maxlength="60" placeholder="${t('你的名字或昵称','Your name or nickname')}" value="${esc(name)}"><div class="actions"><button class="primary" id="start">${t(answers.some(a=>a.m!==null)?'继续探索':'开始探索',answers.some(a=>a.m!==null)?'Continue assessment':'Start exploring')} ↗</button>${finished?`<button class="ghost" id="old">${t('查看报告','View report')}</button>`:''}</div><p class="note">${t('没有标准答案。请选择平时真实的自己，而非理想中的自己。','There are no right answers. Choose your usual behavior, not your ideal self.')}</p></div><div class="wheel">${profiles.map((p,j)=>`<div class="tile ${keys[j].toLowerCase()}"><b>${keys[j]}</b><span>${p[en?1:0]}</span><small>${p[en?3:2]}</small></div>`).join('')}</div></section><section class="steps">${[[t('选择最像与最不像','Choose most & least'),t('每组四句话，选择一项最像你、一项最不像你。','In each group, choose one statement most like you and one least like you.')],[t('看见四项数据','See four dimensions'),t('通过相对倾向指数与图表，理解自己的行为偏好。','Understand your preferences with relative indices and a chart.')],[t('把理解带进合作','Bring insight to teamwork'),t('获得沟通建议、潜在盲点与一项行动练习。','Get communication tips, possible blind spots and a practical action.')]].map((x,j)=>`<div><span class="num">0${j+1}</span><b>${x[0]}</b><p>${x[1]}</p></div>`).join('')}</section><p class="note">${t('本工具为原创教育用途自评，未经信效度或常模验证；不等同于 123test 或任何官方 DISC 测评。不要作为招聘、诊断或能力评定的唯一依据。','This original educational self-reflection tool has no validation or normative study. It is not 123test or an official DISC assessment. Do not use it as the sole basis for hiring, diagnosis or ability judgments.')}</p>`;$('start').onclick=()=>{name=$('name').value.trim();view='test';stash();render();scrollTo(0,0)};if($('old'))$('old').onclick=()=>{name=$('name').value.trim();view='report';render()}}
-function test(){let a=answers[idx],count=answers.filter(a=>a.m!==null&&a.l!==null).length;let order=[0,1,2,3].map((_,j)=>(j+idx)%4);$('app').innerHTML=`<section class="test"><div class="topline"><span>${t('行为风格探索','BEHAVIOUR EXPLORER')}</span><span>${t('已完成','Completed')} ${count} / 16</span></div><div class="progress"><i style="width:${count/16*100}%"></i></div><div class="eyebrow">GROUP ${String(idx+1).padStart(2,'0')} / 16</div><h2>${t('哪句话更像平时的你？','Which sounds most like you?')}</h2><p class="subtitle">${t('各选一项「最像我」和「最不像我」，不能选同一句。','Select one “Most like me” and one “Least like me”. Choose different statements.')}</p><div class="panel"><div class="question-row" style="border:0;min-height:40px"><span class="note">${t('请根据日常行为作答','Think about your usual behavior')}</span><span class="colhead">${t('最像我','Most')}</span><span class="colhead">${t('最不像我','Least')}</span></div>${order.map(j=>`<div class="question-row"><div>${raw[idx][j][en?1:0]}</div>${['m','l'].map(k=>`<label class="choice"><input class="pick" type="radio" name="${k}" value="${j}" aria-label="${esc(raw[idx][j][en?1:0]+' — '+(k==='m'?t('最像我','Most like me'):t('最不像我','Least like me')))}" ${a[k]===j?'checked':''}></label>`).join('')}</div>`).join('')}</div><div class="actions" style="justify-content:space-between"><button class="ghost" id="prev">← ${t(idx?'上一组':'返回首页',idx?'Previous':'Home')}</button><button class="primary" id="next" ${a.m===null||a.l===null?'disabled':''}>${idx===15?t('生成我的报告','See my report'):t('下一组','Next group')} →</button></div><p class="note">${t('进度自动保存在当前浏览器；测试数据不会上传服务器。','Progress is saved in this browser. Assessment data is not uploaded to a server.')}</p></section>`;document.querySelectorAll('.pick').forEach(el=>el.onchange=()=>{a[el.name]=+el.value;let other=el.name==='m'?'l':'m';if(a[other]===+el.value)a[other]=null;finished=false;stash();test()});$('prev').onclick=()=>{if(idx)idx--;else view='home';stash();render()};$('next').onclick=()=>{if(a.m===null||a.l===null)return;if(idx<15){idx++;stash();test()}else{let missing=answers.findIndex(a=>a.m===null||a.l===null);if(missing>=0){idx=missing;test();return}finished=true;view='report';stash();report()}scrollTo(0,0)}}
-function score(){let most=[0,0,0,0],least=[0,0,0,0];answers.forEach(a=>{most[a.m]++;least[a.l]++});let net=most.map((v,j)=>v-least[j]);let index=net.map(v=>Math.round((v+16)/32*100));return{most,least,net,index}}
-function report(){if(!answers.every(a=>a.m!==null&&a.l!==null)){view='test';test();return}let r=score(),max=Math.max(...r.net),tops=keys.filter((k,j)=>r.net[j]===max),rank=keys.map((k,j)=>j).sort((a,b)=>r.net[b]-r.net[a]),p=profiles[rank[0]],tie=tops.length>1;let title=tie?t('并列倾向','Tied tendencies'):p[en?1:0];$('app').innerHTML=`<div class="results-top"><div><div class="eyebrow">YOUR BEHAVIOUR SNAPSHOT</div><h1 style="font-size:42px">${esc(name)?esc(name)+' · ':''}${t('行为风格报告','Behaviour profile')}</h1><div class="subtitle">${new Date().toLocaleDateString(en?'en-MY':'zh-CN')} · 16 / 16 ${t('组已完成','groups completed')}</div></div><span class="badge">${t('自我探索版','Self-reflection edition')}</span></div><div class="reportgrid"><section class="panel"><div class="eyebrow">DISC PROFILE</div><h2>${t('四项行为倾向指数','Four tendency indices')}</h2>${keys.map((k,j)=>`<div class="barrow"><b style="color:${colors[j]}">${k}</b><div class="track"><div class="fill" style="width:${r.index[j]}%;background:${colors[j]}"></div></div><b>${r.index[j]}</b></div>`).join('')}<p class="note">${t('0–100 相对指数；50 代表最像与最不像次数相同。四项独立，不相加为 100，也不是人群百分位。','Relative indices from 0–100. 50 means equal most/least counts. Scores do not sum to 100 and are not population percentiles.')}</p></section><section class="panel"><div class="eyebrow">${t('本次主要倾向','LEADING TENDENCY')}</div><h2 style="font-size:38px">${tops.join(' / ')} <span style="font-size:20px">${title}</span></h2><p>${tie?t('你的最高净分出现并列，暂不强行归为单一类型。可结合下方各项说明与真实经历理解。','Your highest net scores are tied. A single type is not assigned; consider the descriptions below alongside real experiences.'):p[en?5:4]}</p><h3 style="font-size:15px">${t('沟通与合作建议','Communication & collaboration')}</h3><p class="subtitle">${tie?tops.map(k=>profiles[keys.indexOf(k)][en?7:6]).join(' '):p[en?7:6]}</p><h3 style="font-size:15px">${t('留意的盲点','A possible blind spot')}</h3><p class="subtitle">${tie?t('在不同情境中，你的偏好可能变化；留意何时需要果断、倾听、支持或核实。','Your preferences may shift by context; notice when to decide, listen, support or verify.'):p[en?9:8]}</p></section></div><div class="cards">${profiles.map((p,j)=>`<article class="tile ${keys[j].toLowerCase()}"><b>${keys[j]} <span style="font-size:14px">${p[en?1:0]}</span></b><p>${p[en?5:4]}</p><small>${t('最像','Most')} ${r.most[j]} · ${t('最不像','Least')} ${r.least[j]} · ${t('净分','Net')} ${r.net[j]}</small></article>`).join('')}</div><section class="panel" style="margin-top:24px"><h3>${t('下一次合作，试做一件事','One action for your next collaboration')}</h3><p class="subtitle">${t('找一位熟悉你的伙伴，对照一次真实合作经历：哪一项描述符合你？哪一项不符合？共同约定一个可以实践的沟通调整。','Ask someone who knows you to reflect on a real collaboration: what fits, and what does not? Agree on one practical communication adjustment.')}</p></section><div class="method"><details><summary>${t('分数怎样计算？','How are scores calculated?')}</summary><p class="note">${t('每组四句分别对应 D、I、S、C，顺序轮换。最像 +1，最不像 −1，其余 0。16 组累加，每项净分范围 −16 至 +16；指数 = 四舍五入〔(净分 + 16) ÷ 32 × 100〕。最高净分为主要倾向；同分并列展示。这是本工具的透明规则，不是标准化 DISC 常模算法。','Each group maps one statement to each dimension, with rotating display order. Most = +1, least = −1, others = 0. Net scores range from −16 to +16. Index = round((net + 16) / 32 × 100). Highest net score indicates the leading tendency; ties are shown together. This is a transparent custom rule, not a standardized DISC norm algorithm.')}</p></details><details><summary>${t('如何理解与保护我的数据？','Interpretation & privacy')}</summary><p class="note">${t('原创题目未经信效度验证。结果反映本次自陈选择，会随角色、情境与时间变化；不代表能力、心理诊断或固定人格。仅用于教育、自我反思与团队讨论。名字和答案只保存于此浏览器，清除按钮可删除；下载的报告请自行妥善保管。','Original items are not psychometrically validated. Results reflect current self-reported choices and may change with context, role and time. They are not an ability rating, diagnosis or fixed personality label. Use for education, reflection and team discussion. Name and answers stay in this browser; the clear button deletes them. Keep downloaded reports secure.')}</p></details></div><div class="actions no-print"><button class="primary" id="print">${t('打印 / 保存 PDF','Print / Save PDF')} ↗</button><button class="ghost" id="download">${t('下载数据报告','Download data report')}</button><button class="ghost" id="edit">${t('检查答案','Review answers')}</button><button class="ghost" id="reset">${t('清除并重新测试','Clear & restart')}</button></div>`;$('print').onclick=()=>window.print();$('download').onclick=()=>{const b=new Blob([JSON.stringify({assessment:'DISC LAB original educational self-reflection v1',name,date:new Date().toISOString(),...r,leading:tops,answers,method:'Most +1, least -1; index=round((net+16)/32*100); not normed or validated'},null,2)],{type:'application/json'});let u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='DISC-report.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};$('edit').onclick=()=>{view='test';idx=0;render();scrollTo(0,0)};$('reset').onclick=()=>{if(confirm(t('删除本机的姓名、答案和报告，重新开始？','Delete this device’s name, answers and report and start again?'))){answers=raw.map(()=>({m:null,l:null}));name='';idx=0;finished=false;try{localStorage.removeItem('disc-lab-v1')}catch(e){}view='home';render();scrollTo(0,0)}}}
-$('language').onclick=()=>{if($('name'))name=$('name').value.trim();en=!en;render()};render();
-</script></html>
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#980000">
+<title>MEIKO Wellness Puchong | RM68 体验4项保健服务</title>
+<meta name="description" content="MEIKO Wellness 位于雪兰莪 Puchong，RM68 一次体验足部养生、艾灸椅、盆骨椅及太空舱4项保健服务。WhatsApp 012-268 9133 了解服务与预约到店。">
+<link rel="canonical" href="https://meikowellness.my/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:site_name" content="MEIKO Wellness">
+<meta property="og:title" content="MEIKO Wellness Puchong | RM68 体验4项保健服务">
+<meta property="og:description" content="MEIKO Wellness 位于雪兰莪 Puchong，RM68 一次体验足部养生、艾灸椅、盆骨椅及太空舱4项保健服务。WhatsApp 012-268 9133 了解服务与预约到店。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://meikowellness.my/">
+<meta property="og:locale" content="zh_MY">
+<meta property="og:image" content="https://meikowellness.my/assets/social-preview.jpg">
+<meta property="og:image:alt" content="MEIKO Wellness Puchong 门店环境、品牌墙与产品陈列">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MEIKO Wellness Puchong | RM68 体验4项保健服务">
+<meta name="twitter:description" content="MEIKO Wellness 位于雪兰莪 Puchong，RM68 一次体验足部养生、艾灸椅、盆骨椅及太空舱4项保健服务。WhatsApp 012-268 9133 了解服务与预约到店。">
+<meta name="twitter:image" content="https://meikowellness.my/assets/social-preview.jpg">
+
+<link rel="icon" href="favicon.ico?v=meiko-flower" sizes="any"><link rel="icon" href="favicon-32.png?v=meiko-flower" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=meiko-flower"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="motion.css"><script src="app.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://meikowellness.my/#meiko",
+      "name": "MEIKO",
+      "foundingDate": "2007"
+    },
+    {
+      "@type": "HealthAndBeautyBusiness",
+      "@id": "https://meikowellness.my/#puchong",
+      "name": "MEIKO Wellness Puchong",
+      "alternateName": "MEIKO Wellness",
+      "url": "https://meikowellness.my/",
+      "logo": "https://meikowellness.my/assets/logo.png",
+      "image": [
+        "https://meikowellness.my/assets/reception.webp",
+        "https://meikowellness.my/assets/storefront.webp"
+      ],
+      "description": "MEIKO Wellness 是位于马来西亚雪兰莪 Puchong 的养生体验门店。RM68 配套包括足部养生、艾灸椅、盆骨椅和太空舱，共 4 项不同的保健服务。",
+      "telephone": "+60122689133",
+      "email": "meikowellnesshq@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "129, Jalan Metro 1/1, Persiaran Bandar Metro Puchong",
+        "addressLocality": "Puchong",
+        "addressRegion": "Selangor",
+        "postalCode": "47160",
+        "addressCountry": "MY"
+      },
+      "parentOrganization": {
+        "@id": "https://meikowellness.my/#meiko"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "MEIKO Wellness 体验服务",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@id": "https://meikowellness.my/#rm68-experience"
+            },
+            "price": "68.00",
+            "priceCurrency": "MYR",
+            "url": "https://meikowellness.my/#package"
+          }
+        ]
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+60122689133",
+        "contactType": "customer service",
+        "availableLanguage": [
+          "Chinese",
+          "English"
+        ],
+        "url": "https://wa.me/60122689133"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://meikowellness.my/#website",
+      "name": "MEIKO Wellness",
+      "url": "https://meikowellness.my/",
+      "inLanguage": [
+        "zh-Hans",
+        "en"
+      ],
+      "publisher": {
+        "@id": "https://meikowellness.my/#puchong"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://meikowellness.my/#webpage",
+      "name": "MEIKO Wellness Puchong | RM68 体验4项保健服务",
+      "url": "https://meikowellness.my/",
+      "description": "MEIKO Wellness 位于雪兰莪 Puchong，RM68 一次体验足部养生、艾灸椅、盆骨椅及太空舱4项保健服务。WhatsApp 012-268 9133 了解服务与预约到店。",
+      "inLanguage": "zh-Hans",
+      "isPartOf": {
+        "@id": "https://meikowellness.my/#website"
+      },
+      "about": {
+        "@id": "https://meikowellness.my/#puchong"
+      },
+      "mainEntity": {
+        "@id": "https://meikowellness.my/#rm68-experience"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://meikowellness.my/#rm68-experience",
+      "name": "RM68 四项保健体验",
+      "description": "MEIKO Wellness 是位于马来西亚雪兰莪 Puchong 的养生体验门店。RM68 配套包括足部养生、艾灸椅、盆骨椅和太空舱，共 4 项不同的保健服务。",
+      "provider": {
+        "@id": "https://meikowellness.my/#puchong"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Puchong"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "68.00",
+        "priceCurrency": "MYR",
+        "url": "https://meikowellness.my/#package"
+      },
+      "isRelatedTo": [
+        {
+          "@id": "https://meikowellness.my/#foot"
+        },
+        {
+          "@id": "https://meikowellness.my/#moxi"
+        },
+        {
+          "@id": "https://meikowellness.my/#pelvic"
+        },
+        {
+          "@id": "https://meikowellness.my/#capsule"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://meikowellness.my/#foot",
+      "name": "足部养生体验",
+      "alternateName": "Foot wellness",
+      "provider": {
+        "@id": "https://meikowellness.my/#puchong"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://meikowellness.my/#moxi",
+      "name": "艾灸椅体验",
+      "alternateName": "Moxibustion chair experience",
+      "provider": {
+        "@id": "https://meikowellness.my/#puchong"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://meikowellness.my/#pelvic",
+      "name": "盆骨椅体验",
+      "alternateName": "Pelvic chair experience",
+      "provider": {
+        "@id": "https://meikowellness.my/#puchong"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://meikowellness.my/#capsule",
+      "name": "太空舱体验",
+      "alternateName": "Wellness capsule experience",
+      "provider": {
+        "@id": "https://meikowellness.my/#puchong"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://meikowellness.my/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "如何预约 RM68 四项体验？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "点击页面的 WhatsApp 预约按钮，告诉我们您想了解 RM68 四项保健体验，再与门店人员确认适合的到访时间。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RM68 包含哪些服务？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RM68 可体验足部养生、艾灸椅、盆骨椅及太空舱，共 4 项不同的保健服务。体验时间及适用安排，请通过 WhatsApp 向门店确认。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "我应该选择哪一项养生体验？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以先咨询门店人员，了解不同设备的体验方式。如果您有健康状况或对设备适用性有疑问，请先向医疗专业人士了解。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">跳至主要内容</a>
+<header class="header"><a class="brand" href="#home" aria-label="MEIKO Wellness 首页"><img src="assets/logo.png" alt="MEIKO Wellness" width="700" height="218"></a>
+<nav id="nav" aria-label="主导航"><a href="#about" data-i18n="navAbout">关于我们</a><a href="#experiences" data-i18n="navExp">养生体验</a><a href="#package" data-i18n="navEquip">RM68 体验配套</a><a href="#visit" data-i18n="navVisit">门店资讯</a></nav>
+<div class="header-actions"><button id="language" class="language" aria-label="Switch to English">EN</button><a href="#contact" class="button small" data-i18n="book">预约 RM68 体验</a><button class="menu" id="menu" aria-controls="nav" aria-expanded="false" aria-label="打开导航"><span></span><span></span></button></div></header>
+<main id="main">
+<section class="hero" id="home"><div class="hero-copy"><p class="eyebrow hero-tag" data-i18n="heroTag">MEIKO WELLNESS · 初次养生体验</p><div class="hero-title-art"><img src="assets/rm68-title-imagegen-v1.png" alt="" width="1536" height="1024" fetchpriority="high"></div><h1 data-i18n="heroTitle">一次体验，<br>四种关爱。</h1><div class="hero-price"><span class="price-currency">RM</span><strong>68</strong><span class="price-note" data-i18n="priceNote">体验 4 项<br>不同的保健服务</span></div><p class="hero-desc" data-i18n="heroDesc">足部养生 · 艾灸椅 · 盆骨椅 · 太空舱<br>让身体慢下来，把关爱留给自己。</p><div class="hero-actions"><a class="button" data-whatsapp href="https://wa.me/60122689133?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%20MEIKO%20Wellness%20RM68%20%E4%BD%93%E9%AA%8C4%E9%A1%B9%E4%BF%9D%E5%81%A5%E6%9C%8D%E5%8A%A1%EF%BC%88%E8%B6%B3%E9%83%A8%E5%85%BB%E7%94%9F%E3%80%81%E8%89%BE%E7%81%B8%E6%A4%85%E3%80%81%E7%9B%86%E9%AA%A8%E6%A4%85%E3%80%81%E5%A4%AA%E7%A9%BA%E8%88%B1%EF%BC%89%EF%BC%8C%E8%AF%B7%E9%97%AE%E5%8F%AF%E4%BB%A5%E9%A2%84%E7%BA%A6%E4%BB%80%E4%B9%88%E6%97%B6%E9%97%B4%EF%BC%9F" data-i18n="discover">WhatsApp 预约 RM68 体验</a><a class="text-link" href="#experiences" data-i18n="find">了解 4 项服务</a></div><div class="hero-note"><svg class="sun-mark" aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M16 2v28M2 16h28M6 6l20 20M6 26 26 6"/></svg><span data-i18n="heroNote">MEIKO 的用心服务<br><b>延伸至 MEIKO Wellness 的养生体验</b></span></div></div>
+<div class="hero-visual"><div class="arch-line" aria-hidden="true"></div><img class="hero-photo" src="assets/reception.webp" alt="MEIKO Wellness 门店内的品牌墙、产品陈列及红色座椅" fetchpriority="high" width="1800" height="1200"><div class="photo-label"><span>MEIKO WELLNESS</span><strong>PUCHONG</strong><span data-i18n="photoLabel">舒适空间 · 贴心服务</span></div><span class="vertical-note">A LITTLE TIME. A BETTER EVERYDAY.</span></div></section>
+<div class="pillars" aria-label="四步养生理念"><div><span data-i18n="warm">暖</span><p>WARM</p></div><div><span data-i18n="relax">松</span><p>RELAX</p></div><div><span data-i18n="restore">修</span><p>RESTORE</p></div><div><span data-i18n="unwind">缓</span><p>UNWIND</p></div><p class="pillars-note" data-i18n="pillarsNote">用心关照身体，<br>让每一天更有活力。</p></div>
+<section class="about section" id="about"><div class="about-photos"><img class="about-main" src="assets/lounge.webp" alt="门店内舒适的养生座椅与足部体验空间" loading="lazy" width="1800" height="1200"><div class="about-inset"><img src="assets/products.webp" alt="MEIKO 门店的产品陈列柜" loading="lazy" width="1067" height="1600"></div><div class="photo-stamp">WELLNESS<br><em>with care</em></div></div><div class="about-copy"><p class="eyebrow">FROM MEIKO TO MEIKO WELLNESS</p><h2 data-i18n="aboutTitle">从 MEIKO，<br>走进 MEIKO Wellness。</h2><p class="lead" data-i18n="aboutLead">品牌的用心，一直都在。养生的体验，由此展开。</p><p data-i18n="aboutBody">MEIKO 从 2007 年的首家门市出发，逐步累积门店服务经验。如今，这份对顾客的关爱延伸至 MEIKO Wellness：以现代养生科技、舒适空间与贴心指导，让养生走进日常。</p><p class="entity-summary" data-i18n="entityIntro">MEIKO Wellness 是位于马来西亚雪兰莪 Puchong 的养生体验门店。RM68 配套包括足部养生、艾灸椅、盆骨椅和太空舱，共 4 项不同的保健服务。</p><div class="brand-evolution"><span>MEIKO <small data-i18n="brandSince">SINCE 2007 · 品牌积累</small></span><i aria-hidden="true"></i><span>MEIKO WELLNESS <small data-i18n="brandNow">现代养生 · 用心服务</small></span></div><div class="about-values"><div><span class="mini-leaf" aria-hidden="true"></span><div><h3 data-i18n="value1">专业指导</h3><p data-i18n="value1p">了解您的需求，介绍合适的体验。</p></div></div><div><svg class="mini-heart" aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16 27 5 16C-3 6 10-1 16 8 22-1 35 6 27 16Z"/></svg><div><h3 data-i18n="value2">贴心陪伴</h3><p data-i18n="value2p">从初次咨询，到每一次到店体验。</p></div></div></div><a class="text-link" href="#contact" data-i18n="know">与我们聊聊您的养生需求</a></div></section>
+<section class="experience-section section" id="experiences"><div class="section-head"><div><p class="eyebrow">FIND YOUR MOMENT</p><h2 data-i18n="expTitle">4 项保健服务，<br><span>给自己一份完整关爱。</span></h2></div><p data-i18n="expIntro">RM68，即可体验以下 4 项服务。<br>点击服务，先了解每一项体验。</p></div><div class="experience-layout"><div class="experience-tabs" role="tablist" aria-label="养生体验"><button id="tab-foot" role="tab" aria-selected="true" aria-controls="experience-panel" data-experience="foot"><span class="tab-label" data-i18n="exp1">足部养生体验</span><span class="tab-en">FOOT WARMING</span><span class="tab-plus" aria-hidden="true">＋</span></button><button id="tab-moxi" role="tab" aria-selected="false" aria-controls="experience-panel" tabindex="-1" data-experience="moxi"><span class="tab-label" data-i18n="exp2">艾灸椅体验</span><span class="tab-en">MOXIBUSTION CHAIR</span><span class="tab-plus" aria-hidden="true">＋</span></button><button id="tab-pelvic" role="tab" aria-selected="false" aria-controls="experience-panel" tabindex="-1" data-experience="pelvic"><span class="tab-label" data-i18n="exp4">盆骨椅体验</span><span class="tab-en">PELVIC CHAIR</span><span class="tab-plus" aria-hidden="true">＋</span></button><button id="tab-capsule" role="tab" aria-selected="false" aria-controls="experience-panel" tabindex="-1" data-experience="capsule"><span class="tab-label" data-i18n="exp3">太空舱温热体验</span><span class="tab-en">WELLNESS CAPSULE</span><span class="tab-plus" aria-hidden="true">＋</span></button></div><div class="experience-panel" id="experience-panel" role="tabpanel" aria-labelledby="tab-foot"><img id="experience-image" src="assets/foot-experience.webp" alt="专业人员示范足部温热设备的控制面板" loading="lazy" width="1800" height="1200"><div class="experience-caption"><div><span class="eyebrow" id="experience-kicker">A MOMENT TO UNWIND</span><h3 id="experience-title">从足部开始，慢下来。</h3><p id="experience-copy">在舒适座椅上，感受温热养生体验。由门店人员介绍设备操作，按个人感受沟通体验安排。</p></div><a class="circle-link" href="#contact" aria-label="咨询体验"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 6h14v10H9l-4 3V6Z"/><path d="M9 10h6M9 13h4"/></svg></a></div></div></div></section>
+<section class="package-section section" id="package"><div class="package-offer"><p class="eyebrow">THE MEIKO WELLNESS EXPERIENCE</p><h2 data-i18n="packageTitle">第一次体验，<br>就从这份关爱开始。</h2><div class="package-price"><span>RM</span><strong>68</strong></div><p class="package-price-label" data-i18n="packageLabel">4 项不同的保健服务，一次体验。</p><a class="button light" data-whatsapp href="https://wa.me/60122689133?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%20MEIKO%20Wellness%20RM68%20%E4%BD%93%E9%AA%8C4%E9%A1%B9%E4%BF%9D%E5%81%A5%E6%9C%8D%E5%8A%A1%EF%BC%88%E8%B6%B3%E9%83%A8%E5%85%BB%E7%94%9F%E3%80%81%E8%89%BE%E7%81%B8%E6%A4%85%E3%80%81%E7%9B%86%E9%AA%A8%E6%A4%85%E3%80%81%E5%A4%AA%E7%A9%BA%E8%88%B1%EF%BC%89%EF%BC%8C%E8%AF%B7%E9%97%AE%E5%8F%AF%E4%BB%A5%E9%A2%84%E7%BA%A6%E4%BB%80%E4%B9%88%E6%97%B6%E9%97%B4%EF%BC%9F" data-i18n="bookPackage">WhatsApp 预约 RM68 体验</a></div><div class="package-includes"><p class="eyebrow" data-i18n="included">YOUR RM68 EXPERIENCE INCLUDES</p><h3 data-i18n="packageSub">给忙碌的自己，<br>一段好好放松的时间。</h3><ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg><span data-i18n="prod1">足部养生体验</span><small>FOOT WELLNESS</small></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg><span data-i18n="prod2">艾灸椅体验</span><small>MOXIBUSTION CHAIR</small></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg><span data-i18n="prod3">盆骨椅体验</span><small>PELVIC CHAIR</small></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg><span data-i18n="prod4">太空舱体验</span><small>WELLNESS CAPSULE</small></li></ul><p class="package-note" data-i18n="packageNote">体验时间、适用安排及详情，欢迎 WhatsApp 咨询门店。</p></div></section>
+<section class="care-section"><div class="care-intro"><p class="eyebrow">YOUR FIRST VISIT</p><h2 data-i18n="careTitle">从预约到体验，<br>每一步都有我们。</h2><p data-i18n="careIntro">WhatsApp 联系我们，安排到店时间。<br>以 RM68，开启您的 4 项保健体验。</p><a class="button light" href="#contact" data-i18n="firstVisit">安排初次到访</a></div><div class="care-steps"><article><svg class="step-icon" aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="16" cy="13" r="9"/><path d="m10 21-3 7 9-5"/></svg><div><h3 data-i18n="step1">WhatsApp 预约时间</h3><p data-i18n="step1p">告诉我们您想预约 RM68 四项保健体验，由门店人员与您确认到访安排。</p></div></article><article><svg class="step-icon" aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16 2v28M2 16h28M6 6l20 20M6 26 26 6"/></svg><div><h3 data-i18n="step2">安心了解设备</h3><p data-i18n="step2p">了解设备的使用方式与体验安排，有任何问题都可以随时询问。</p></div></article><article><svg class="step-icon" aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16 27 5 16C-3 6 10-1 16 8 22-1 35 6 27 16Z"/></svg><div><h3 data-i18n="step3">开启您的 4 项体验</h3><p data-i18n="step3p">在舒适的环境中放松，体验过程中与我们沟通您的感受。</p></div></article></div></section>
+<section class="visit section" id="visit"><div class="visit-image"><img src="assets/storefront.webp" alt="MEIKO Wellness Puchong 门店外观与红色招牌" loading="lazy" width="1800" height="1200"><span class="image-caption">YOUR NEIGHBOURHOOD WELLNESS SPACE</span></div><div class="visit-copy"><p class="eyebrow">COME SAY HELLO</p><h2 data-i18n="visitTitle">在 Puchong，<br>遇见更从容的日常。</h2><h3>MEIKO Wellness Puchong</h3><address>129, Jalan Metro 1/1,<br>Persiaran Bandar Metro Puchong,<br>47160 Puchong, Selangor.</address><p class="visit-note" data-i18n="visitNote">到访前欢迎 WhatsApp 联系，确认营业时间及 RM68 体验安排。</p><div class="visit-actions"><a class="button" href="https://www.google.com/maps/search/?api=1&amp;query=MEIKO%20Wellness%20129%20Jalan%20Metro%201%2F1%20Puchong" target="_blank" rel="noopener noreferrer" data-i18n="directions">打开门店导航</a><button class="text-link" id="copy-address" data-i18n="copyAddress">复制地址</button></div></div></section>
+<section class="faq section"><div><p class="eyebrow">A LITTLE MORE TO KNOW</p><h2 data-i18n="faqTitle">到访之前，<br>您可能想了解。</h2></div><div class="faq-list"><details><summary data-i18n="q1">如何预约 RM68 四项体验？</summary><p data-i18n="a1">点击页面的 WhatsApp 预约按钮，告诉我们您想了解 RM68 四项保健体验，再与门店人员确认适合的到访时间。</p></details><details><summary data-i18n="q2">RM68 包含哪些服务？</summary><p data-i18n="a2">RM68 可体验足部养生、艾灸椅、盆骨椅及太空舱，共 4 项不同的保健服务。体验时间及适用安排，请通过 WhatsApp 向门店确认。</p></details><details><summary data-i18n="q3">我应该选择哪一项养生体验？</summary><p data-i18n="a3">可以先咨询门店人员，了解不同设备的体验方式。如果您有健康状况或对设备适用性有疑问，请先向医疗专业人士了解。</p></details></div></section>
+<section class="contact" id="contact"><span class="contact-leaf" aria-hidden="true"></span><p class="eyebrow">MAKE TIME FOR YOURSELF</p><h2 data-i18n="contactTitle">RM68 · 4 项保健体验<br><em>把关爱，留给自己。</em></h2><p data-i18n="contactIntro">直接 WhatsApp 联系我们，了解服务及预约到店。</p><a class="button" data-whatsapp href="https://wa.me/60122689133?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%20MEIKO%20Wellness%20RM68%20%E4%BD%93%E9%AA%8C4%E9%A1%B9%E4%BF%9D%E5%81%A5%E6%9C%8D%E5%8A%A1%EF%BC%88%E8%B6%B3%E9%83%A8%E5%85%BB%E7%94%9F%E3%80%81%E8%89%BE%E7%81%B8%E6%A4%85%E3%80%81%E7%9B%86%E9%AA%A8%E6%A4%85%E3%80%81%E5%A4%AA%E7%A9%BA%E8%88%B1%EF%BC%89%EF%BC%8C%E8%AF%B7%E9%97%AE%E5%8F%AF%E4%BB%A5%E9%A2%84%E7%BA%A6%E4%BB%80%E4%B9%88%E6%97%B6%E9%97%B4%EF%BC%9F" data-i18n="emailUs">WhatsApp 预约 · 012-268 9133</a><p class="contact-direct">WhatsApp: <a href="https://wa.me/60122689133" target="_blank" rel="noopener noreferrer">+60 12-268 9133</a> · Puchong, Selangor</p><button id="copy-email" class="email-copy">meikowellnesshq@gmail.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="8" width="11" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"/></svg><span class="sr-only" data-i18n="copyEmail">复制电邮地址</span></button></section>
+</main><a class="floating-book" data-whatsapp href="https://wa.me/60122689133?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%20MEIKO%20Wellness%20RM68%20%E4%BD%93%E9%AA%8C4%E9%A1%B9%E4%BF%9D%E5%81%A5%E6%9C%8D%E5%8A%A1%EF%BC%88%E8%B6%B3%E9%83%A8%E5%85%BB%E7%94%9F%E3%80%81%E8%89%BE%E7%81%B8%E6%A4%85%E3%80%81%E7%9B%86%E9%AA%A8%E6%A4%85%E3%80%81%E5%A4%AA%E7%A9%BA%E8%88%B1%EF%BC%89%EF%BC%8C%E8%AF%B7%E9%97%AE%E5%8F%AF%E4%BB%A5%E9%A2%84%E7%BA%A6%E4%BB%80%E4%B9%88%E6%97%B6%E9%97%B4%EF%BC%9F"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.2A8 8 0 1 1 20 11.5Z"/><path d="M8 8c0 4 2 6 6 6l1-2-2-1-1 1-2-2 1-1-1-2-2 1Z"/></svg><span data-i18n="floatingBook">预约 RM68 体验</span></a><div class="scroll-progress" aria-hidden="true"></div>
+<footer><div class="footer-main"><a href="#home" class="footer-brand"><img src="assets/logo.png" alt="MEIKO Wellness" width="700" height="218"></a><p>Your Wellness, Our Care.</p><div><span>PUCHONG · MALAYSIA</span><a href="#home" data-i18n="backTop">回到顶部</a></div></div><div class="footer-bottom"><span>© <span id="year">2026</span> MEIKO Wellness.</span><span data-i18n="footerLine">用心服务 · 舒适空间 · 专业指导</span></div></footer>
+<dialog id="product-dialog" aria-labelledby="dialog-title"><button id="close-dialog" class="dialog-close" aria-label="关闭详情">×</button><img id="dialog-image" src="assets/foot-warmer.webp" alt=""><div class="dialog-copy"><p class="eyebrow">MEIKO WELLNESS EQUIPMENT</p><h2 id="dialog-title"></h2><p id="dialog-description"></p><h3 data-i18n="visitExpect">到店可以了解</h3><ul id="dialog-points"></ul><a class="button" href="#contact" id="dialog-contact" data-i18n="askEquipment">咨询这项设备</a></div></dialog>
+<div class="toast" role="status" aria-live="polite" id="toast"></div>
+</body></html>
